@@ -26,8 +26,8 @@ const getAllDocuments = async (req, res, next) => {
             data.forEach(doc => {
                 const document = new Document(
                     doc.id,
-                    doc.data().name,
                     doc.data().location,
+                    doc.data().name,
                     doc.data().photo,
                 );
                 documentsArray.push(document);

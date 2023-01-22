@@ -8,6 +8,7 @@ const firestore = firebase.firestore();
 const addDocument = async (req, res, next) => {
     try {
         const data = req.body;
+        data.created_by = req.user_id;
         await firestore.collection('documents').doc().set(data);
         res.send('Record saved successfuly');
     } catch (error) {
@@ -29,6 +30,7 @@ const getAllDocuments = async (req, res, next) => {
                     doc.data().location,
                     doc.data().name,
                     doc.data().photo,
+                    doc.data().created_by
                 );
                 documentsArray.push(document);
             });

@@ -3,12 +3,25 @@
 const firebase = require('../database');
 const Document = require('../models/document');
 const firestore = firebase.firestore();
+const database = firebase.database();
 
+const getUuid = (data, uuid) => {
+    data.uuids = uuid;
+    return data;
+}
 
 const addDocument = async (req, res, next) => {
     try {
         const data = req.body;
         data.created_by = req.user_id;
+        var all = [];
+
+        database.ref("Node 1").once("value", function(snapshot){
+            const uuid = snapshot.val();
+            all.push(uuid);
+        })
+        all = database.ref("Node 1").get();
+        return res.send(all);
         await firestore.collection('documents').doc().set(data);
         res.send('Record saved successfuly');
     } catch (error) {

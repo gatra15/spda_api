@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const config = require('./config');
 const documentRoute = require('./routes/documentRoute');
 const authRoute = require('./routes/authRoute');
+const imageRoute = require('./routes/imageRoute');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', authRoute.routes);
 app.use('/api/admin', documentRoute.routes);
+app.use('/api/file', imageRoute.routes);
 
 
 
